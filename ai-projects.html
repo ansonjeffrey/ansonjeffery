@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AI Projects — Anson Jeffrey .C</title>
+
+<!-- particles.js CDN (same as your main site) -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+
+<style>
+  :root{
+    --bg:#0b0b0c;
+    --glass:rgba(255,255,255,0.03);
+    --accent1:#8af3d0;
+    --accent2:#9b8bff;
+    --text:#e9eef6;
+    --muted:#9aa2ab;
+    --card-bg: rgba(255,255,255,0.02);
+    --maxw:1100px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Arial;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  /* particles layer */
+  #particles-js{position:fixed;inset:0;z-index:0;background:linear-gradient(180deg,#070708 0%, #0b0b0c 60%)}
+
+  /* animated gradient header */
+  header{
+    position:relative;z-index:2;
+    max-width:var(--maxw);margin:28px auto 0;padding:18px 26px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow:0 8px 30px rgba(2,6,23,0.6);
+    border:1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(6px);
+    animation:fadeInUp .6s ease forwards;
+  }
+  .logo{display:flex;gap:12px;align-items:center}
+  .logo .badge{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#062;box-shadow:0 6px 20px rgba(0,0,0,0.4)}
+  .logo span{font-weight:600;font-size:18px}
+  .back{color:var(--muted);font-size:14px;opacity:.95}
+
+  main{position:relative;z-index:2;max-width:var(--maxw);margin:30px auto;padding:36px;border-radius:14px;overflow:hidden}
+  .panel{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:12px;padding:34px;border:1px solid rgba(255,255,255,0.03);
+    display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start;
+    box-shadow:0 10px 40px rgba(2,6,23,0.6);
+  }
+
+  /* left column */
+  .hero .eyebrow{font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+  .hero h1{font-size:44px;line-height:1.04;margin:0 0 14px;background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .hero p{color:var(--muted);font-size:15px;max-width:62ch;margin-bottom:20px}
+  .features{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+  .chip{background:var(--card-bg);padding:8px 12px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid rgba(255,255,255,0.02);transform:translateY(0);transition:transform .18s}
+
+  /* animated project cards */
+  .cards{display:flex;flex-direction:column;gap:16px;margin-top:18px}
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;gap:14px;cursor:pointer;
+    transform:translateY(18px);opacity:0;transition:transform .36s cubic-bezier(.2,.9,.3,1), box-shadow .2s;
+  }
+  .card.visible{transform:translateY(0);opacity:1}
+  .card:hover{box-shadow:0 18px 40px rgba(0,0,0,0.5);transform:translateY(-6px) rotateX(2deg)}
+  .card .thumb{width:84px;height:64px;border-radius:8px;background:linear-gradient(115deg,var(--accent2),var(--accent1));flex:0 0 84px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#062}
+  .card h4{margin:0;font-size:16px}
+  .card p{margin:4px 0 0;color:var(--muted);font-size:13px}
+
+  /* right sidebar */
+  .sidebar{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+  .sidebar h3{margin:0 0 12px}
+  .stat{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:8px;background:rgba(255,255,255,0.01);margin-bottom:10px;transition:transform .2s}
+  .stat strong{font-size:20px}
+  .progress{height:8px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;margin-top:8px}
+  .progress > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent1),var(--accent2));transition:width 1s cubic-bezier(.2,.9,.3,1)}
+
+  /* decorative floating blobs */
+  .blob{position:absolute;border-radius:50%;filter:blur(36px);opacity:.14;z-index:1}
+  .blob.b1{width:360px;height:360px;right:-120px;top:-80px;background:linear-gradient(120deg,var(--accent1),var(--accent2));animation:floatA 8s ease-in-out infinite}
+  .blob.b2{width:260px;height:260px;left:-100px;bottom:-60px;background:linear-gradient(120deg,var(--accent2),var(--accent1));animation:floatB 10s ease-in-out infinite}
+
+  @keyframes floatA{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(18px) rotate(6deg)}100%{transform:translateY(0) rotate(0)}}
+  @keyframes floatB{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-18px) rotate(-6deg)}100%{transform:translateY(0) rotate(0)}}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+  /* responsive */
+  @media (max-width:980px){
+    .panel{grid-template-columns:1fr; padding:28px}
+    .blob.b1{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- particles (same id as on your main site) -->
+<div id="particles-js"></div>
+
+<header>
+  <div class="logo">
+    <div class="badge">AJ</div>
+    <span>Anson Jeffrey .C</span>
+  </div>
+  <a class="back" href="indexx.html">← Back to Portfolio</a>
+</header>
+
+<main>
+  <div class="panel" role="main">
+
+    <!-- left column -->
+    <section class="hero">
+      <div class="eyebrow">Selected Works — AI & ML</div>
+      <h1>AI Projects Showcase</h1>
+      <p>Collection of machine learning, NLP and computer vision projects — prototypes, demos and production-ready scripts. Click any card to open the project details or demo.</p>
+
+      <div class="features">
+        <div class="chip">Python • TensorFlow</div>
+        <div class="chip">NLP • Transformers</div>
+        <div class="chip">Computer Vision</div>
+        <div class="chip">Deployment & APIs</div>
+      </div>
+
+      <div class="cards" id="cards">
+  <div class="card" data-target="project-image-classifier.html">
+    <div class="thumb">
+      <img src="C:\\Users\\system12\\Documents\\WEBSITE\\download.png" alt="Image Classifier Project">
+    </div>
+    <div>
+      <h4>Image Classifier</h4>
+      <p>CNN model + transfer learning for multi-class image recognition.</p>
+    </div>
+  </div>
+
+  <div class="card" data-target="project-chatbot.html">
+    <div class="thumb">
+      <img src="C:\\Users\\system12\\Documents\\WEBSITE\\download.png" alt="Chatbot Project">
+    </div>
+    <div>
+      <h4>AI Chatbot</h4>
+      <p>Conversational AI using Transformers for natural language interaction.</p>
+    </div>
+  </div>
+
+  <div class="card" data-target="project-object-detection.html">
+    <div class="thumb">
+      <img src="C:\\Users\\system12\\Documents\\WEBSITE\\download.png" alt="Object Detection Project">
+    </div>
+    <div>
+      <h4>Object Detection</h4>
+      <p>YOLOv5-based real-time detection with webcam and video feed.</p>
+    </div>
+  </div>
+</div>
+
+            <h4>Image Classifier</h4>
+            <p>CNN model + transfer learning for multi-class image recognition.</p>
+          </div>
+        </div>
+
+        <div class="card" data-target="project-chatbot.html">
+          <div class="thumb">CB</div>
+          <div>
